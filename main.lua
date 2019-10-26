@@ -52,6 +52,8 @@ function createCar()
   }
 end
 
+
+
 function love.draw()
   -- Draw the race track
   love.graphics.setColor(1, 1, 1)
@@ -64,6 +66,7 @@ function love.draw()
     sprite = 18 - sprite
   end
   drawSprite(carImage, 12, 12, sprite, car.x - 6, car.y - 6, car.rotation >= math.pi)
+
 
 end
 
@@ -82,4 +85,26 @@ function drawSprite(spriteSheetImage, spriteWidth, spriteHeight, sprite, x, y, f
     spriteWidth / 2,
     spriteHeight / 2
   )
+end
+
+function love.update(dt)
+
+  if love.keyboard.isDown('down') then
+    car.speed = math.max(car.speed - 20 * dt, -10)
+  elseif love.keyboard.isDown('up') then
+    car.speed = math.min(car.speed + 50 * dt, 40)
+  else
+    car.speed = car.speed * 0.98
+  end
+
+  -- -- Turn the car by pressing the left and right keys
+  -- local turnSpeed = 3 * math.min(math.max(0, math.abs(car.speed) / 20), 1) - (car.speed > 20 and (car.speed - 20) / 20 or 0)
+  -- if love.keyboard.isDown('left') then
+  --   car.rotation = car.rotation - turnSpeed * dt
+  -- end
+
+  -- Move the car
+  car.x = car.x + car.speed * -math.sin(car.rotation) * dt + car.bounceVelocityX * dt
+  car.y = car.y + car.speed * math.cos(car.rotation) * dt + car.bounceVelocityY * dt
+
 end
