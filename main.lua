@@ -34,7 +34,7 @@ function love.load()
 
   -- Create the car and an array for the puffs of exhaust
   puffs = {}
-  car = createCar()
+  -- car = createCar()
 
 end
 
