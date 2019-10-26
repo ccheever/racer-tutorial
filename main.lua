@@ -34,9 +34,21 @@ function love.load()
 
   -- Create the car and an array for the puffs of exhaust
   puffs = {}
-  -- car = createCar()
+  car = createCar()
 
 end
 
-
+-- Creates the playable car
+function createCar()
+  return {
+    x = 95, 
+    y = 28,
+    bounceVelocityX = 0,
+    bounceVelocityY = 0,
+    speed = 0,
+    rotation = math.pi / 2,
+    engineNoiseTimer = 0.00,
+    puffTimer = 0.00,
+  }
+end
 
